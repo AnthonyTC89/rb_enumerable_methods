@@ -58,16 +58,15 @@ module Enumerable
         return count
     end
 
-    # def my_map
-    #     self.length.times do |i|
-    #         self[i] = yield self[i]
-    #     end
-    #     return self
-    # end
-
-    def my_map (my_proc)
-        self.length.times do |i|
-            self[i] = my_proc.call(self[i])
+    def my_map (*my_proc)
+        if my_proc.length == 0
+            self.length.times do |i|
+                self[i] = yield self[i]
+            end
+        else
+            self.length.times do |i|
+                self[i] = my_proc[0].call(self[i])
+            end
         end
         return self
     end
@@ -87,7 +86,10 @@ end
 
 array = [1,2,3,4,5]
 
+p array.my_map {|elem| elem + 2}
+
 p array.my_map(Proc.new { |elem| elem * 2 })
+
 p array.map { |elem| elem * 2}
 
 # p multiply_els array
@@ -95,9 +97,6 @@ p array.map { |elem| elem * 2}
 
 # p array.my_inject { |elem, n| elem + n}
 # p array.inject { |elem, n| elem + n}
-
-# p array.my_map {|elem| elem + 2}
-# p array.map { |elem| elem + 2}
 
 # p array.my_count {|elem| elem > 2}
 # p array.count { |elem| elem > 2}
