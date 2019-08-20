@@ -78,11 +78,11 @@ def multiply_els(array)
   array.my_inject { |elem, n| elem * n }
 end
 
-array = [1, 2, 3, 4, 5]
+# array = [1, 2, 3, 4, 5]
 
-p array.my_map { |elem| elem + 2 }
-p array.my_map(proc { |elem| elem * 2 })
-p array.map { |elem| elem * 2 }
+# p array.my_map { |elem| elem + 2 }
+# p array.my_map(proc { |elem| elem * 2 })
+# p array.map { |elem| elem * 2 }
 
 # p multiply_els array
 # p array.inject { |elem, n| elem * n}
