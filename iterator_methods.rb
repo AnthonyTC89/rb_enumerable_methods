@@ -2,31 +2,31 @@
 
 module Enumerable
   def my_each
-    length.times {|i| yield self[i]}
+    length.times { |i| yield self[i] }
   end
 
   def my_each_with_index
-    length.times {|i| yield self[i], i}
+    length.times { |i| yield self[i], i }
   end
 
   def my_select
     aux_array = []
-    length.times {|i| aux_array << self[i] if yield self[i]}
+    length.times { |i| aux_array << self[i] if yield self[i] }
     aux_array
   end
 
   def my_all?
     if block_given?
-      length.times {|i| return false unless yield self[i]}
+      length.times { |i| return false unless yield self[i] }
     else
-      length.times {|i| return false unless self[i]}
+      length.times { |i| return false unless self[i] }
     end
     true
   end
 
   def my_any?
     if block_given?
-      length.times {|i| return true if yield self[i]}
+      length.times { |i| return true if yield self[i] }
     else
       length.times { |i| return true if self[i] }
     end
@@ -45,9 +45,9 @@ module Enumerable
   def my_count(*arg)
     count = 0
     if arg.empty?
-      block_given? ? length.times { |i| count += 1 if yield self[i]} :  count = self.length
+      block_given? ? length.times { |i| count += 1 if yield self[i] } : count = length
     else
-      length.times {|i| count += 1 if self[i] == arg[0]}
+      length.times { |i| count += 1 if self[i] == arg[0] }
     end
     count
   end
@@ -65,8 +65,8 @@ module Enumerable
     self
   end
 
-  def my_inject (*arg)
-    arg.empty? ? memo = self[0] : memo = arg[0]
+  def my_inject(*arg)
+    memo = arg.empty? ? self[0] : arg[0]
     (length - 1).times do |i|
       memo = yield memo, self[i + 1]
     end
@@ -78,7 +78,7 @@ def multiply_els(array)
   array.my_inject { |elem, n| elem * n }
 end
 
-array = [1,2,3,4,5]
+array = [1, 2, 3, 4, 5]
 
 p array.my_map { |elem| elem + 2 }
 p array.my_map(proc { |elem| elem * 2 })
